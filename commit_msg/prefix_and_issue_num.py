@@ -32,12 +32,7 @@ def main():
         'remove/',
     ]
 
-    commit_msg_file = pathlib.Path('./.git/COMMIT_EDITMSG')
-    commit_msg = commit_msg_file.read_text(encoding='utf-8')
-    print(commit_msg)
-    return 1
-
-    git_dir = pathlib.Path(__file__).parents[1]/'.git'
+    git_dir = commit_msg_file = pathlib.Path('./.git/')
     commit_msg_file = pathlib.Path(git_dir/'COMMIT_EDITMSG')
     commit_msg = commit_msg_file.read_text(encoding='utf-8')
     head = pathlib.Path(git_dir/'HEAD').read_text(encoding='utf-8')
