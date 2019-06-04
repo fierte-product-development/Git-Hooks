@@ -32,7 +32,9 @@ def main():
         'remove/',
     ]
 
-    print(pathlib.Path('./.git'))
+    commit_msg_file = pathlib.Path('./.git/COMMIT_EDITMSG')
+    commit_msg = commit_msg_file.read_text(encoding='utf-8')
+    print(commit_msg)
     return 1
 
     git_dir = pathlib.Path(__file__).parents[1]/'.git'
