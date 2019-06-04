@@ -1,6 +1,6 @@
 -   id: prefix_and_issue_num
     name: prefix_and_issue_num
-    description: ブランチ名からイシュー番号を取得しコミットメッセージに付与します
+    description: Get issue number from branch name and add to commit message.
     entry: prefix_and_issue_num
     language: python
     stages: [commit-msg]
