@@ -5,7 +5,7 @@ import pathlib
 import re
 
 
-def main(argv):
+def main():
     """
     return
     1 ... Failed
@@ -32,8 +32,7 @@ def main(argv):
         'remove/',
     ]
 
-    args = argparse.ArgumentParser().parse_args(argv)
-    print(args)
+    print(pathlib.Path('./.git'))
     return 1
 
     git_dir = pathlib.Path(__file__).parents[1]/'.git'
