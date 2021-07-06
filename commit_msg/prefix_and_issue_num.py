@@ -29,6 +29,7 @@ def main():
         'update/',
         'add/',
         'remove/',
+        'Merge '
     ]
 
     git_dir = commit_msg_file = pathlib.Path('./.git/')
