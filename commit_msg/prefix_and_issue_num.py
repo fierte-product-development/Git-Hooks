@@ -29,13 +29,13 @@ def main():
         'update/',
         'add/',
         'remove/',
-        'Merge '
     ]
 
     git_dir = commit_msg_file = pathlib.Path('./.git/')
     commit_msg_file = pathlib.Path(git_dir/'COMMIT_EDITMSG')
     commit_msg = commit_msg_file.read_text(encoding='utf-8')
     head = pathlib.Path(git_dir/'HEAD').read_text(encoding='utf-8')
+    not_merge = commit_msg[0:commit_msg.find(' ')] != 'Merge'
 
     # ブランチ名チェック
     # イシュー番号付与チェック
@@ -50,13 +50,15 @@ def main():
             error_list.append(1)
 
     # コミットメッセージチェック
-    # プレフィックスチェック
-    prefix = commit_msg[0:commit_msg.find('/')+1]
-    if prefix not in prefix_list:
-        error_list.append(2)
+    # マージコミットチェック
+    if not_merge:
+        # プレフィックスチェック
+        prefix = commit_msg[0:commit_msg.find('/')+1]
+        if prefix not in prefix_list:
+            error_list.append(2)
 
     # コミットメッセージ書き換え
-    if not error_list:
+    if not error_list and not_merge:
         rewrite_msg = f'[{prefix[0:-1]}]{issue_num} '
         commit_msg_file.write_text(commit_msg.replace(prefix, rewrite_msg), encoding='utf-8')
     else:
