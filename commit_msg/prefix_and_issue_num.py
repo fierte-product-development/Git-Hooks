@@ -30,13 +30,13 @@ def main():
         'add/',
         'remove/',
     ]
-    merge_prefix = ['[fix]', '[update]', '[add]', '[remove]', 'Merge', 'Revert']
+    merge_match_ptn = r'(\[fix\]|\[update\]|\[add\]|\[remove\]|Merge|Revert)'
 
     git_dir = commit_msg_file = pathlib.Path('./.git/')
     commit_msg_file = pathlib.Path(git_dir/'COMMIT_EDITMSG')
     commit_msg = commit_msg_file.read_text(encoding='utf-8')
     head = pathlib.Path(git_dir/'HEAD').read_text(encoding='utf-8')
-    not_merge = commit_msg[0:re.search(r'(#|\s)', commit_msg).start()] in merge_prefix
+    not_merge = bool(re.search(merge_match_ptn, commit_msg))
 
     # ブランチ名チェック
     # イシュー番号付与チェック
