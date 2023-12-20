@@ -33,6 +33,8 @@ def main():
     merge_match_ptn = r'(\[fix\]|\[update\]|\[add\]|\[remove\]|Merge|Revert)'
 
     git_dir = commit_msg_file = pathlib.Path('./.git/')
+    if git_dir.is_file():
+        git_dir = pathlib.Path(git_dir.read_text(encoding='utf-8').split()[1])
     commit_msg_file = pathlib.Path(git_dir/'COMMIT_EDITMSG')
     commit_msg = commit_msg_file.read_text(encoding='utf-8')
     head = pathlib.Path(git_dir/'HEAD').read_text(encoding='utf-8')
